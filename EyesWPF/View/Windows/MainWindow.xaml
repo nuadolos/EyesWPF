@@ -1,0 +1,20 @@
+﻿<Window x:Class="EyesWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyesWPF"
+        mc:Ignorable="d"
+        Title="{Binding Path=Content.Text, ElementName=MainFrame}" Height="450" Width="950" Icon="/EyesWPF;component/Resources/Eyes-save.ico" MinWidth="950" MinHeight="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/EyesWPF;component/Resources/Eyes-save.png" HorizontalAlignment="Left" Stretch="Uniform"></Image>
+        <TextBlock Text="Глазки-save" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+        
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Background="#FFE9F9"></Frame>
+    </Grid>
+</Window>

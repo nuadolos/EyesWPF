@@ -1,0 +1,90 @@
+﻿<Page x:Class="EyesWPF.View.Pages.AgentViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EyesWPF.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="950"
+      Title="AgentViewPage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="230"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Width="350" Height="30" Margin="10" HorizontalAlignment="Left" Text="Введите для поиска" FontSize="14" Padding="4" Name="TextFilt" TextChanged="TextFilt_TextChanged" GotFocus="TextFilt_GotFocus" LostFocus="TextFilt_LostFocus"></TextBox>
+        <ComboBox Name="ComboSort" Grid.Column="1" HorizontalAlignment="Left" SelectionChanged="ComboSort_SelectionChanged">
+            <ComboBoxItem>
+                <TextBlock Text="Нет"></TextBlock>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Наименование"></TextBlock>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Размер скидки"></TextBlock>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <TextBlock Text="Приоритет"></TextBlock>
+            </ComboBoxItem>
+        </ComboBox>
+        <CheckBox Name="CheckOrder" Content="По убыванию" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Checked="CheckOrder_Checked" Unchecked="CheckOrder_Unchecked"></CheckBox>
+        <ComboBox Name="ComboFilt" DisplayMemberPath="Title" Grid.Column="2" SelectionChanged="ComboFilt_SelectionChanged"></ComboBox>
+
+
+        <ListView Name="AgentView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="3" SelectionChanged="AgentView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding Logo}" Name="StringPath" Visibility="Collapsed"></TextBlock>
+                        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Width="200" Height="30">
+                            <Image.Source>
+                                <Binding Path="Text" StringFormat="/EyesWPF;component/View/" ElementName="StringPath">
+                                    <Binding.TargetNullValue>
+                                        <DataTemplate>
+                                            <Image Source="pack://siteoforigin:,,,/Resources/picture.png"></Image>
+                                        </DataTemplate>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+
+                        <TextBlock Grid.Column="1">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} | {1}">
+                                    <Binding Path="AgentType.Title"></Binding>
+                                    <Binding Path="Title"></Binding>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ProdCount, StringFormat={}{0} продаж за год}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Phone}"></TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Priority, StringFormat=Приоритетность: {0}}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Discount, StringFormat={}{0}%}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Content="Изменить приоритет на ..." Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Hidden" Name="PriorityChangeBtn" Click="PriorityChangeBtn_Click"></Button>
+    </Grid>
+</Page>

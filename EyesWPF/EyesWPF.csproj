@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\AddSale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\ChangePriority.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +155,9 @@
     <Compile Include="View\Pages\AgentViewPage.xaml.cs">
       <DependentUpon>AgentViewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\AddSale.xaml.cs">
+      <DependentUpon>AddSale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\ChangePriority.xaml.cs">
       <DependentUpon>ChangePriority.xaml</DependentUpon>
     </Compile>
@@ -200,7 +207,7 @@
       <DependentUpon>AgentsModel.edmx</DependentUpon>
       <LastGenOutput>AgentsModel.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\picture.png" />
+    <Resource Include="Resources\picture.png" />
     <Resource Include="View\agents\agent_1.png" />
     <Resource Include="View\agents\agent_10.png" />
     <Resource Include="View\agents\agent_100.png" />

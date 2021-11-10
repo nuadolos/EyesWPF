@@ -134,7 +134,7 @@ namespace EyesWPF.View.Pages
             if (Visibility == Visibility.Visible)
             {
                 Transition.Context.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-                AgentView.ItemsSource = Transition.Context.Agent.ToList();
+                UpdateData();
             }
         }
 

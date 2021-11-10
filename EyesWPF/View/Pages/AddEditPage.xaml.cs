@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EyesWPF.Model;
 using EyesWPF.Utils;
+using EyesWPF.View.Windows;
 
 namespace EyesWPF.View.Pages
 {
@@ -29,7 +30,12 @@ namespace EyesWPF.View.Pages
             InitializeComponent();
 
             if (selectedAgent != null)
+            {
                 newAgent = selectedAgent;
+
+                AgentSaleGrid.ItemsSource = Transition.Context.ProductSale.ToList()
+                    .Where(p => p.AgentID == selectedAgent.ID);
+            }
 
             DataContext = newAgent;
             AgentTypeBox.ItemsSource = Transition.Context.AgentType.ToList();
@@ -41,7 +47,7 @@ namespace EyesWPF.View.Pages
 
             if (string.IsNullOrWhiteSpace(newAgent.Title))
                 error.AppendLine("Введите наименование");
-            if (newAgent.AgentTypeID == 0)
+            if (newAgent.AgentType == null)
                 error.AppendLine("Выберите тип агента");
             if (newAgent.Priority == 0)
                 error.AppendLine("Введите приоритет");
@@ -73,11 +79,28 @@ namespace EyesWPF.View.Pages
             {
                 Transition.Context.SaveChanges();
                 MessageBox.Show("Данные сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                Transition.MainFrame.GoBack();
             }
             catch (Exception er)
             {
                 MessageBox.Show("Возникла ошибка при сохранении: " + er.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddSale addSale = new AddSale(newAgent.ID);
+            if (addSale.ShowDialog() == true)
+            {
+                AgentSaleGrid.ItemsSource = Transition.Context.ProductSale.ToList()
+                   .Where(p => p.AgentID == newAgent.ID);
+            }
+
+        }
+
+        private void BtnDel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

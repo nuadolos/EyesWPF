@@ -5,15 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EyesWPF.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="950"
+      d:DesignHeight="450" d:DesignWidth="1100"
       Title="Внесение изменений">
 
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -45,6 +47,18 @@
         <TextBox Text="{Binding Phone}" Grid.Column="3" Grid.Row="3"></TextBox>
         <TextBox Text="{Binding Email}" Grid.Column="3" Grid.Row="4"></TextBox>
 
+        <Grid Background="Black" Grid.Column="4" Grid.RowSpan="6"></Grid>
+
         <Button Content="Сохранить" Grid.Row="5" Name="BtnSave" Click="BtnSave_Click" Grid.ColumnSpan="4"></Button>
+        <Button Content="Добавить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Left" Margin="10" Name="BtnAdd" Click="BtnAdd_Click"></Button>
+        <Button Content="Удалить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Right" Margin="10" Name="BtnDel" Click="BtnDel_Click"></Button>
+
+        <DataGrid Grid.Column="5" Grid.RowSpan="4" Margin="10" Name="AgentSaleGrid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Продукция" Binding="{Binding Product.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding ProductCount}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата продажи" Binding="{Binding SaleDate, StringFormat=d}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

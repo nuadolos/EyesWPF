@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:EyesWPF.View.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="950"
-      Title="AgentViewPage" IsVisibleChanged="Page_IsVisibleChanged">
+      Title="Агенты" IsVisibleChanged="Page_IsVisibleChanged">
 
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
@@ -74,7 +74,16 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Content="Изменить приоритет на ..." Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Hidden" Name="PriorityChangeBtn" Click="PriorityChangeBtn_Click"></Button>
+        <Button Content="Изменить приоритет на ..." Grid.Row="2" Grid.Column="1" Visibility="Hidden" Name="PriorityChangeBtn" Click="PriorityChangeBtn_Click" Width="200"></Button>
         <Button Content="Добавить агента" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Click="BtnAdd_Click"></Button>
+
+        <WrapPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Name="BtnPreviousPage" Click="BtnPreviousPage_Click" Width="20" Height="20" Content="&lt;" Background="Transparent" BorderBrush="Transparent" Visibility="Hidden"></Button>
+            <Button Name="BtnOnePage" Click="BtnOnePage_Click" Width="20" Height="20" Content="1" Background="Transparent" BorderBrush="Transparent"></Button>
+            <Button Name="BtnTwoPage" Click="BtnTwoPage_Click" Width="20" Height="20" Content="2" Background="Transparent" BorderBrush="Transparent"></Button>
+            <Button Name="BtnThreePage" Click="BtnThreePage_Click" Width="20" Height="20" Content="3" Background="Transparent" BorderBrush="Transparent"></Button>
+            <Button Name="BtnFourPage" Click="BtnFourPage_Click" Width="20" Height="20" Content="4" Background="Transparent" BorderBrush="Transparent"></Button>
+            <Button Name="BtnNextPage" Click="BtnNextPage_Click" Width="20" Height="20" Content=">" Background="Transparent" BorderBrush="Transparent"></Button>
+        </WrapPanel>
     </Grid>
 </Page>

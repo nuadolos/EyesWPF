@@ -39,12 +39,15 @@ namespace EyesWPF.Model
             get
             {
                 int count = 0;
+                DateTime dateToday = DateTime.Now;
 
                 foreach (var item in ProductSale)
                 {
-                    count += item.ProductCount;
+                    if ((item.SaleDate.Year == dateToday.Year - 1 && item.SaleDate.DayOfYear >= dateToday.DayOfYear)
+                        || (item.SaleDate.Year == dateToday.Year && item.SaleDate.DayOfYear <= dateToday.DayOfYear))
+                        count += item.ProductCount;
                 }
-
+                
                 return count;
             }
         }

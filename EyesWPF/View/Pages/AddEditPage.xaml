@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EyesWPF.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1100"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="Внесение изменений">
 
     <Grid Background="AliceBlue">
@@ -38,8 +38,8 @@
 
         <TextBox Text="{Binding Title}" Grid.Column="1"></TextBox>
         <ComboBox SelectedItem="{Binding AgentType}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Name="AgentTypeBox" DisplayMemberPath="Title" SelectedValuePath="ID"></ComboBox>
-        <TextBox Text="{Binding Priority}" Grid.Column="1" Grid.Row="2"></TextBox>
-        <TextBox Text="{Binding Logo}" Grid.Column="1" Grid.Row="3"></TextBox>
+        <TextBox Text="{Binding Priority}" Grid.Column="1" Grid.Row="2" Name="PriorExcep"></TextBox>
+        <TextBox Text="{Binding Logo}" Grid.Column="1" Grid.Row="3" Name="LogoBox"></TextBox>
         <TextBox Text="{Binding Address}" Grid.Column="1" Grid.Row="4"></TextBox>
         <TextBox Text="{Binding INN}" Grid.Column="3"></TextBox>
         <TextBox Text="{Binding KPP}" Grid.Column="3" Grid.Row="1"></TextBox>
@@ -49,11 +49,13 @@
 
         <Grid Background="Black" Grid.Column="4" Grid.RowSpan="6"></Grid>
 
-        <Button Content="Сохранить" Grid.Row="5" Name="BtnSave" Click="BtnSave_Click" Grid.ColumnSpan="4"></Button>
-        <Button Content="Добавить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Left" Margin="10" Name="BtnAdd" Click="BtnAdd_Click"></Button>
-        <Button Content="Удалить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Right" Margin="10" Name="BtnDel" Click="BtnDel_Click"></Button>
+        <Button Content="Сохранить" Grid.Row="5" Name="BtnSave" Click="BtnSave_Click" Grid.ColumnSpan="2" HorizontalAlignment="Left"></Button>
+        <Button Content="Загрузить логотип" Grid.Row="5" Grid.Column="2" Name="BtnDown" Click="BtnDown_Click" Grid.ColumnSpan="2" HorizontalAlignment="Right"></Button>
+        <Button Content="Удалить агента" Grid.Row="5" Name="BtnDelAgent" Click="BtnDelAgent_Click" Grid.ColumnSpan="4" HorizontalAlignment="Center" Visibility="Hidden"></Button>
+        <Button Content="Добавить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Left" Margin="10" Name="BtnAdd" Click="BtnAdd_Click" Visibility="Hidden"></Button>
+        <Button Content="Удалить" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Right" Margin="10" Name="BtnDel" Click="BtnDel_Click" Visibility="Hidden"></Button>
 
-        <DataGrid Grid.Column="5" Grid.RowSpan="4" Margin="10" Name="AgentSaleGrid" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="5" Grid.RowSpan="4" Margin="10" Name="AgentSaleGrid" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Продукция" Binding="{Binding Product.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество" Binding="{Binding ProductCount}"></DataGridTextColumn>

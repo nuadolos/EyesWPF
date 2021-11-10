@@ -38,10 +38,20 @@ namespace EyesWPF.View.Windows
 
             if (newProdSale.Product == null)
                 error.AppendLine("Выберите продукт");
-            if (string.IsNullOrWhiteSpace(newProdSale.ProductCount.ToString()))
-                error.AppendLine("Введите количество");
+
+            try
+            {
+                newProdSale.ProductCount = Convert.ToInt32(CountExcep.Text);
+                if (newProdSale.ProductCount < 0)
+                    error.AppendLine("Количество продукции не может быть отрицательным");
+            }
+            catch (Exception)
+            {
+                error.AppendLine("Количество продукции должно быть целым");
+            }
+
             if (string.IsNullOrWhiteSpace(newProdSale.SaleDate.ToString()))
-                error.AppendLine("Введите дату продажи");
+                error.AppendLine("Введите дату продажи правильно: ММ.ДД.ГГ");
 
             if (error.Length > 0)
             {
@@ -56,6 +66,7 @@ namespace EyesWPF.View.Windows
             {
                 Transition.Context.SaveChanges();
                 Transition.Context.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DialogResult = true;
                 MessageBox.Show("Данные сохранены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }

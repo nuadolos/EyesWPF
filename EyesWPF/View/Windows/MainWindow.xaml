@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyesWPF"
         mc:Ignorable="d"
-        Title="{Binding Path=Content.Text, ElementName=MainFrame}" Height="600" Width="1200" Icon="../../Resources/Eyes-save.ico" MinWidth="1200" MinHeight="600">
+        Title="{Binding Path=Content.Title, ElementName=MainFrame}" Height="600" Width="1200" Icon="../../Resources/Eyes-save.ico" MinWidth="1200" MinHeight="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>

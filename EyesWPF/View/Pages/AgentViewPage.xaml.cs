@@ -23,10 +23,14 @@ namespace EyesWPF.View.Pages
     /// </summary>
     public partial class AgentViewPage : Page
     {
+        private List<Agent> ItemsAgent { get { return Transition.Context.Agent.ToList(); } }
+
+        private NavigateList navigate = new NavigateList();
+
         public AgentViewPage()
         {
             InitializeComponent();
-
+            
             var allTypes = Transition.Context.AgentType.ToList();
             allTypes.Insert(0, new AgentType
             {
@@ -36,12 +40,13 @@ namespace EyesWPF.View.Pages
             ComboFilt.SelectedIndex = 0;
             ComboSort.SelectedIndex = 0;
 
-            AgentView.ItemsSource = Transition.Context.Agent.ToList();
+            navigate.EndIndex = ItemsAgent.Count;
+            AgentView.ItemsSource = ItemsAgent.GetRange(navigate.StartIndex, navigate.CountOutAgents);
         }
 
         public void UpdateData()
         {
-            var currentData = Transition.Context.Agent.ToList();
+            var currentData = ItemsAgent;
 
             if (ComboFilt.SelectedIndex > 0)
                 currentData = currentData.Where(p => p.AgentType.Title == (ComboFilt.SelectedValue as AgentType).Title).ToList();
@@ -53,44 +58,72 @@ namespace EyesWPF.View.Pages
 
             switch (ComboSort.SelectedIndex)
             {
-                case 0:
-                    AgentView.ItemsSource = currentData;
-                    break;
                 case 1:
-                    if (CheckOrder.IsChecked == false)
-                        AgentView.ItemsSource = currentData.OrderBy(p => p.Title);
-                    else
-                        AgentView.ItemsSource = currentData.OrderByDescending(p => p.Title);
-                    break;
+                    {
+                        if (CheckOrder.IsChecked == false)
+                            currentData = currentData.OrderBy(p => p.Title).ToList();
+                        else
+                            currentData = currentData.OrderByDescending(p => p.Title).ToList();
+                        break;
+                    }
                 case 2:
-                    if (CheckOrder.IsChecked == false)
-                        AgentView.ItemsSource = currentData.OrderBy(p => p.Discount);
-                    else
-                        AgentView.ItemsSource = currentData.OrderByDescending(p => p.Discount);
-                    break;
+                    {
+                        if (CheckOrder.IsChecked == false)
+                            currentData = currentData.OrderBy(p => p.Discount).ToList();
+                        else
+                            currentData = currentData.OrderByDescending(p => p.Discount).ToList();
+                        break;
+                    }
                 case 3:
-                    if (CheckOrder.IsChecked == false)
-                        AgentView.ItemsSource = currentData.OrderBy(p => p.Priority);
-                    else
-                        AgentView.ItemsSource = currentData.OrderByDescending(p => p.Priority);
+                    {
+                        if (CheckOrder.IsChecked == false)
+                            currentData = currentData.OrderBy(p => p.Priority).ToList();
+                        else
+                            currentData = currentData.OrderByDescending(p => p.Priority).ToList();
+                        break;
+                    }
+            }
+
+            navigate.EndIndex = currentData.Count;
+
+            if (navigate.UsedBySearch)
+                BtnNextPage.Visibility = Visibility.Hidden;
+            else
+                BtnNextPage.Visibility = Visibility.Visible;
+
+            for (int i = navigate.CountOutAgents; i > 0; i--)
+            {
+                try
+                {
+                    AgentView.ItemsSource = currentData.GetRange(navigate.StartIndex, i);
                     break;
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
 
         private void TextFilt_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (TextFilt.Text != "Введите для поиска")
-                UpdateData();
+            {
+                navigate.NumberPage = 1;
+                ControlOutList();
+            }
         }
 
         private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateData();
+            navigate.NumberPage = 1;
+            ControlOutList();
         }
 
         private void ComboFilt_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateData();
+            navigate.NumberPage = 1;
+            ControlOutList();
         }
 
         private void TextFilt_GotFocus(object sender, RoutedEventArgs e)
@@ -100,17 +133,20 @@ namespace EyesWPF.View.Pages
 
         private void TextFilt_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextFilt.Text = "Введите для поиска";
+            if (TextFilt.Text == "")
+                TextFilt.Text = "Введите для поиска";
         }
 
         private void CheckOrder_Checked(object sender, RoutedEventArgs e)
         {
-            UpdateData();
+            navigate.NumberPage = 1;
+            ControlOutList();
         }
 
         private void CheckOrder_Unchecked(object sender, RoutedEventArgs e)
         {
-            UpdateData();
+            navigate.NumberPage = 1;
+            ControlOutList();
         }
 
         private void AgentView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,7 +181,65 @@ namespace EyesWPF.View.Pages
 
         private void AgentView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Transition.MainFrame.Navigate(new AddEditPage(AgentView.SelectedItem as Agent));
+            if (AgentView.SelectedItems.Count == 1)
+                Transition.MainFrame.Navigate(new AddEditPage(AgentView.SelectedItem as Agent));
+            else
+                MessageBox.Show("Для изменения данных необходимо выделить только одну запись", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        #region Кнопки, предназначенные для навигации по List<Agent>
+
+        private void BtnPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            navigate.NumberPage -= 1;
+            ControlOutList();
+        }
+
+        private void BtnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            navigate.NumberPage += 1;
+            navigate.GetIndex();
+
+            UpdateData();
+
+            if (navigate.HasPreviousPage)
+                BtnPreviousPage.Visibility = Visibility.Visible;
+            if (navigate.NumberPage == navigate.TotalPage)
+                BtnNextPage.Visibility = Visibility.Hidden;
+        }
+
+        private void BtnOnePage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnTwoPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnThreePage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnFourPage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        private void ControlOutList()
+        {
+            navigate.GetIndex();
+
+            if (!navigate.HasPreviousPage)
+                BtnPreviousPage.Visibility = Visibility.Hidden;
+            if (navigate.HasNextPage)
+                BtnNextPage.Visibility = Visibility.Visible;
+
+            UpdateData();
         }
     }
 }

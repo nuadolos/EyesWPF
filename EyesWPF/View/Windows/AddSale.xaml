@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyesWPF.View.Windows"
         mc:Ignorable="d"
-        Title="AddSale" Height="300" Width="450">
+        Title="Проданная продукция" Height="300" Width="450" Icon="../../Resources/Eyes-save.ico">
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,7 +24,7 @@
         <TextBlock Text="Дата продажи:" Grid.Row="3" Margin="5"></TextBlock>
         
         <ComboBox SelectedItem="{Binding Product}" Name="TitleProdBox" Grid.Row="1" Grid.Column="1" IsTextSearchEnabled="True" HorizontalAlignment="Left" DisplayMemberPath="Title"></ComboBox>
-        <TextBox Text="{Binding ProductCount}" Grid.Row="2" Grid.Column="1" Width="175" Margin="10"></TextBox>
+        <TextBox Text="{Binding ProductCount}" Grid.Row="2" Grid.Column="1" Width="175" Margin="10" Name="CountExcep"></TextBox>
         <TextBox Text="{Binding SaleDate, StringFormat=d}" Grid.Row="3" Grid.Column="1" Width="175" Margin="10"></TextBox>
         <Button Content="Сохранить" Grid.Row="4" HorizontalAlignment="Left" Name="BtnAdd" Click="BtnAdd_Click"></Button>
         <Button Content="Отменить" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Name="BtnCancel" Click="BtnCancel_Click"></Button>

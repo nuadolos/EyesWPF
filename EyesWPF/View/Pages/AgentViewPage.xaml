@@ -39,7 +39,7 @@
         <ComboBox Name="ComboFilt" DisplayMemberPath="Title" Grid.Column="2" SelectionChanged="ComboFilt_SelectionChanged"></ComboBox>
 
 
-        <ListView Name="AgentView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="3" SelectionChanged="AgentView_SelectionChanged">
+        <ListView Name="AgentView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="3" SelectionChanged="AgentView_SelectionChanged" MouseDoubleClick="AgentView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -86,5 +86,6 @@
         </ListView>
 
         <Button Content="Изменить приоритет на ..." Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Visibility="Hidden" Name="PriorityChangeBtn" Click="PriorityChangeBtn_Click"></Button>
+        <Button Content="Добавить агента" Grid.Row="2" HorizontalAlignment="Left" Name="BtnAdd" Click="BtnAdd_Click"></Button>
     </Grid>
 </Page>

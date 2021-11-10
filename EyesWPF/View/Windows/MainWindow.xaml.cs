@@ -29,5 +29,18 @@ namespace EyesWPF
             MainFrame.Navigate(new AgentViewPage());
             Transition.MainFrame = MainFrame;
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Transition.MainFrame.GoBack();
+        }
+
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            if (Transition.MainFrame.CanGoBack)
+                BtnBack.Visibility = Visibility.Visible;
+            else
+                BtnBack.Visibility = Visibility.Hidden;
+        }
     }
 }

@@ -137,5 +137,15 @@ namespace EyesWPF.View.Pages
                 AgentView.ItemsSource = Transition.Context.Agent.ToList();
             }
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Transition.MainFrame.Navigate(new AddEditPage(null));
+        }
+
+        private void AgentView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Transition.MainFrame.Navigate(new AddEditPage(AgentView.SelectedItem as Agent));
+        }
     }
 }

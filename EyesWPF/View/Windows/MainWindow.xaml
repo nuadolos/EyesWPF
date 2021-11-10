@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EyesWPF"
         mc:Ignorable="d"
-        Title="{Binding Path=Content.Text, ElementName=MainFrame}" Height="450" Width="950" Icon="/EyesWPF;component/Resources/Eyes-save.ico" MinWidth="950" MinHeight="450">
+        Title="{Binding Path=Content.Text, ElementName=MainFrame}" Height="450" Width="950" Icon="../../Resources/Eyes-save.ico" MinWidth="950" MinHeight="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/EyesWPF;component/Resources/Eyes-save.png" HorizontalAlignment="Left" Stretch="Uniform"></Image>
+        <Image Source="/Resources/Eyes-save.png" HorizontalAlignment="Left" Stretch="Uniform"></Image>
         <TextBlock Text="Глазки-save" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"></TextBlock>
+
+        <Button Name="BtnBack" HorizontalAlignment="Right" Margin="20" Content="Назад" Click="BtnBack_Click" Visibility="Hidden"></Button>
         
-        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Background="#FFE9F9"></Frame>
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Background="#FFE9F9" ContentRendered="MainFrame_ContentRendered"></Frame>
     </Grid>
 </Window>

@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="950"
       Title="Агенты" IsVisibleChanged="Page_IsVisibleChanged">
 
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
@@ -54,8 +54,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding Logo, StringFormat=../{0}}" Name="StringPath" Visibility="Collapsed"></TextBlock>
-                        <Image Source="{Binding Text, ElementName=StringPath, TargetNullValue=../../Resources/picture.png}" Grid.RowSpan="4" Stretch="Uniform" Margin="20, 0"></Image>
+                        <TextBlock Text="{Binding Logo, TargetNullValue=../Resources/picture.png}" Name="StringPath1" Visibility="Collapsed"></TextBlock>
+                        <TextBlock Text="{Binding Text, ElementName=StringPath1, StringFormat=../{0}}" Name="StringPath2" Visibility="Collapsed"></TextBlock>
+                        <Image Source="{Binding Text, ElementName=StringPath2}" Grid.RowSpan="4" Stretch="Uniform" Margin="20, 0"></Image>
 
                         <TextBlock Grid.Column="1">
                             <TextBlock.Text>

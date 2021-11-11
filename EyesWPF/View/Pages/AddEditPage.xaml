@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="1200"
       Title="Внесение изменений">
 
-    <Grid Background="AliceBlue">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>

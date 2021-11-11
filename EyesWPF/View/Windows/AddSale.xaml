@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EyesWPF.View.Windows"
         mc:Ignorable="d"
         Title="Проданная продукция" Height="300" Width="450" Icon="../../Resources/Eyes-save.ico">
-    <Grid Background="AliceBlue">
+    <Grid Background="#FFE9F9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

@@ -9,6 +9,7 @@
 
 namespace EyesWPF.Model
 {
+    using EyesWPF.Utils;
     using System;
     using System.Collections.Generic;
     
@@ -38,17 +39,7 @@ namespace EyesWPF.Model
         {
             get
             {
-                int count = 0;
-                DateTime dateToday = DateTime.Now;
-
-                foreach (var item in ProductSale)
-                {
-                    if ((item.SaleDate.Year == dateToday.Year - 1 && item.SaleDate.DayOfYear >= dateToday.DayOfYear)
-                        || (item.SaleDate.Year == dateToday.Year && item.SaleDate.DayOfYear <= dateToday.DayOfYear))
-                        count += item.ProductCount;
-                }
-                
-                return count;
+                return MoreData.ProdCount();
             }
         }
 
@@ -56,9 +47,7 @@ namespace EyesWPF.Model
         {
             get
             {
-                int discount = 0;
-
-                return discount;
+                return MoreData.Discount(ID);
             }
         }
 

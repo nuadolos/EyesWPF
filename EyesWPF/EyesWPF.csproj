@@ -148,6 +148,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\MoreData.cs" />
     <Compile Include="Utils\NavigateList.cs" />
     <Compile Include="Utils\Transition.cs" />
     <Compile Include="View\Pages\AddEditPage.xaml.cs">

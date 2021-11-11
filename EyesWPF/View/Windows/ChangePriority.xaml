@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EyesWPF.View.Windows"
         mc:Ignorable="d"
         Title="Изменение приоритета" Height="200" Width="400" Icon="../../Resources/Eyes-save.ico">
-    <Grid>
+    <Grid Background="#FFE9F9">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

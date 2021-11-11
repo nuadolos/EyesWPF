@@ -25,6 +25,7 @@ namespace EyesWPF.View.Pages
     /// </summary>
     public partial class AddEditPage : Page
     {
+        //Создание экземпляра newAgent
         private Agent newAgent = new Agent();
 
         public AddEditPage(Agent selectedAgent)

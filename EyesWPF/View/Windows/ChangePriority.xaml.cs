@@ -28,6 +28,8 @@ namespace EyesWPF.View.Windows
             InitializeComponent();
 
             currentAgents = transmittedAgents;
+
+            TextPriority.Text = transmittedAgents.Average(p => p.Priority).ToString();
         }
 
         private void BtnChange_Click(object sender, RoutedEventArgs e)

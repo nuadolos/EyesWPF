@@ -210,22 +210,26 @@ namespace EyesWPF.View.Pages
 
         private void BtnOnePage_Click(object sender, RoutedEventArgs e)
         {
-
+            navigate.NumberPage = 1;
+            ControlOutList();
         }
 
         private void BtnTwoPage_Click(object sender, RoutedEventArgs e)
         {
-
+            navigate.NumberPage = 2;
+            ControlOutList();
         }
 
         private void BtnThreePage_Click(object sender, RoutedEventArgs e)
         {
-
+            navigate.NumberPage = 3;
+            ControlOutList();
         }
 
         private void BtnFourPage_Click(object sender, RoutedEventArgs e)
         {
-
+            navigate.NumberPage = 4;
+            ControlOutList();
         }
 
         #endregion

@@ -20,7 +20,10 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBox Width="350" Height="30" Margin="10" HorizontalAlignment="Left" Text="Введите для поиска" FontSize="14" Padding="4" Name="TextFilt" TextChanged="TextFilt_TextChanged" GotFocus="TextFilt_GotFocus" LostFocus="TextFilt_LostFocus"></TextBox>
+        <TextBox Width="350" Height="30" Margin="10" HorizontalAlignment="Left" Text="Введите для поиска" 
+                 FontSize="14" Padding="4" Name="TextFilt" TextChanged="TextFilt_TextChanged"
+                 GotFocus="TextFilt_GotFocus" LostFocus="TextFilt_LostFocus"></TextBox>
+        
         <ComboBox Name="ComboSort" Grid.Column="1" HorizontalAlignment="Left" SelectionChanged="ComboSort_SelectionChanged">
             <ComboBoxItem>
                 <TextBlock Text="Нет"></TextBlock>
